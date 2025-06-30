@@ -65,6 +65,15 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   }
 });
 
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find({}, '-__v');
+    res.json(users);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 // Get a user's log
 app.get('/api/users/:_id/logs', async (req, res) => {
   try {
